@@ -1,0 +1,17 @@
+{% extends './layouts/main-layout.html' %}
+{% block content %}
+    <h1>hello world!!1!1!</h1>
+
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <div class="file-field input-field">
+            <div class="btn grey">
+                <span>File</span>
+                <input name="upload" type="file">
+            </div>
+            <div class="file-path-wrapper">
+                <input class="file-path validate" type="text">
+            </div>
+        </div>
+        <button class="btn" type="submit"></button>
+    </form>
+{% endblock %}
