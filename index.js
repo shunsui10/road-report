@@ -42,7 +42,7 @@ app.use(session({
 //app.use('/', routes);
 
 app.get('/roadreport/', function(req, res){
-    res.render('home');  
+    res.render('dashboard');  
 });
 
 app.post('/upload', (req, res) => {
