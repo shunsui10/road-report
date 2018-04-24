@@ -6,9 +6,13 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const connection = require('../db.js');
 var fs = require('fs');
+const multer = require('multer');
+const path = require('path');
+const fileupload = require('express-fileupload');
 const app = express();
 
  
+app.use(fileupload());
 
 app.use(session({
     secret: 'fffdfee',

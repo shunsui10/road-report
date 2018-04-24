@@ -1,6 +1,8 @@
 const router = require('express').Router();
 const C_server = require('../controller/C_server');
+var express = require('express');
+var app = express();
 
-router.route('/upload').post(C_server.uploadFile);
+
 
 module.exports = router;
