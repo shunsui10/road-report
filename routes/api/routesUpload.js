@@ -5,12 +5,12 @@ var upload = multer({ dest: 'public' });
 
 
 router.post('/', upload.single('upload'),  function(req, res) {
-    var response = {'response': 'image uploaded'};
+    
     console.log(req.file);
-    res.status(200).json({
+    /* res.status(200).json({
         message: req.file,
         status: "success"
-    });
+    }); */
     res.send("server running perfectly");
   });
 
