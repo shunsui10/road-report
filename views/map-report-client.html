@@ -1,0 +1,74 @@
+{% extends './layouts/main-layout.html' %}
+{% block content %}
+   
+<div style="margin-top: 5%" id="map"></div>
+<div style="margin-left: 40%">
+    <a href="#data" title="lihat daftar pelapor"><i style="font-size: 150px" class="material-icons">expand_more</i></a>
+</div>
+<div id="data">
+    <div style="margin-left: 40%">
+        <a href="#map" title="lihat daftar pelapor"><i style="font-size: 150px" class="material-icons">expand_less</i></a>
+    </div>
+    <div style="overflow-x: scroll; display: list-item; width: 100%; height: 400px; margin-top: -1%" class="striped">
+        {% for obj in info_view %}
+        <div style="height: 55%;" id="dataPelapor" class="card white col s12">
+            <div style="margin-left: 2%; width: 30%">
+                <h6>Nama : {{obj.nama}}</h6>
+                <h6>Id : {{obj.noidentitas}}</h6>
+                <h6>Alamat : {{obj.tempattinggal}}</h6>
+                <h6>Email :</h6>
+                <h6>Nomo hp :</h6>
+                <h6>Tanggal melapor :</h6>
+                <h6>Kategori kerusakan :</h6>
+                <h6>Keterangan tambahan :</h6>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+
+
+    <button style="float: left;" class="waves-effect waves-light btn-large" onclick="goBack()">Kembali</button>
+    <divv class="col s12" style="float: right;">
+        <select class="browser-default">
+            <option value="" disabled selected>Ubah ?</option>
+            <option value="1">diterima</option>
+            <option value="2">proses perencanaan</option>
+            <option value="3">sedang diperbaiki</option>
+        </select>
+    </div>
+    <div style="float: right">
+        <h6>Status laporan</h6>
+    </div>
+
+    
+    <script>
+        
+        var laporan = JSON.parse("{{info}}".replace(/&quot;/g,'"'));
+        console.log(laporan);
+        var latitude, longitude;
+        for(obj in laporan){
+            latitude = parseFloat(laporan[obj].latitude);
+            longitude = parseFloat(laporan[obj].longitude);
+            
+        }
+        
+        function goBack() {
+            window.history.back();
+        }
+        function initMap() {
+            var uluru = {lat: latitude, lng: longitude};
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 15,
+                center: uluru
+            });
+            var marker = new google.maps.Marker({
+                position: uluru,
+                map: map
+            });
+        }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcvnlCETqqhEUoh2sB8QRuH_W5gF1B_3o&callback=initMap">
+    </script>
+  {% endblock %}

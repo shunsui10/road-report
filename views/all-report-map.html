@@ -1,0 +1,51 @@
+{% extends './layouts/main-layout.html' %}
+{% block content %}
+    <h3>My Google Maps Demo</h3>
+    <div id="map"></div>
+    <div style="display: none" id="tes">{{laporan}}</div>
+    <button class="waves-effect waves-light btn-large" onclick="goBack()">Kembali</button>
+    <script>
+        function goBack() {
+            window.history.back();
+        }
+        function initMap() {
+            var laporan =JSON.parse(document.getElementById("tes").innerHTML);
+            console.log(laporan);
+            var locations = [];
+            for(var obj in laporan){
+                locations.push({'alamat': laporan[obj].namaalamat, 'latitude': parseFloat(laporan[obj].latitude), 'longitude': parseFloat(laporan[obj].longitude)});
+                console.log(locations[obj].longitude);
+                
+            }
+            
+
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 10,
+                center: new google.maps.LatLng(-7.983908, 112.621391),
+                mapTypeId: google.maps.MapTypeId.ROADMAP
+            });
+
+            var infowindow = new google.maps.InfoWindow();
+
+            var marker, i;
+
+            for (i in locations) { 
+                marker = new google.maps.Marker({
+                    position: new google.maps.LatLng(locations[i].latitude, locations[i].longitude),
+                    map: map
+            });
+
+            google.maps.event.addListener(marker, 'click', (function(marker, i) {
+                return function() {
+                    infowindow.setContent(locations[i].alamat);
+                    infowindow.open(map, marker);
+                }
+            })(marker, i));
+            }
+            
+        }
+    </script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAcvnlCETqqhEUoh2sB8QRuH_W5gF1B_3o&callback=initMap">
+    </script>
+  {% endblock %}

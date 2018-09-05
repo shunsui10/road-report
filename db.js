@@ -1,9 +1,11 @@
-var mysql = require('mysql');
-var connection = mysql.createConnection({
+var postgres = require('pg');
+var connection = postgres.Pool({
     host: '127.0.0.1',
-    user: 'root',
-    password: '',
-    database: 'tracerstudy',
+    port: '5432',
+    database: 'roadreport',
+    user: 'postgres',
+    username: 'roadreport',
+    password: 'roadreport'
 });
 
 connection.connect(function(err){    

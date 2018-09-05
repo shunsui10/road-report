@@ -1,17 +1,16 @@
 {% extends './layouts/main-layout.html' %}
 {% block content %}
-    <h1>hello world!!1!1!</h1>
-
-    <form action="/roadreport/upload" method="post">
-        <div class="file-field input-field">
-            <div class="btn grey">
-                <span>File</span>
-                <input name="upload" type="file">
-            </div>
-            <div class="file-path-wrapper">
-                <input class="file-path validate" type="text">
-            </div>
+    <h3 style="margin-left: 27%">Prioritas Perbaikan</h3>
+    <div style="margin-bottom: 5%; margin-top: 10%">
+        {% for obj in Location %}
+        <div style="height: 100%; margin-bottom: 3%" class="card white" id="data">
+            
+            {{obj.lat}}<br>
+            {{obj.lng}}<br>
+            {{obj.count}}
+            <a href="/roadreport/web/map-report-client/{{obj.lat}},{{obj.lng}}" class="waves-light amber btn right">Tampilkan Map</a>
         </div>
-        <button class="btn" type="submit"></button>
-    </form>
-{% endblock %}
+        {% endfor %}
+    </div>
+    
+  {% endblock %}
